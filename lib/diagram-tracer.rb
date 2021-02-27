@@ -11,7 +11,10 @@ module DiagramTracer
     rows = []
     result = nil
     trace = TracePoint.new(:call) do |tp|
-      rows << [tp.lineno, tp.defined_class, tp.method_id, tp.self.method(tp.method_id).parameters.map(&:last)]
+      begin
+        rows << [tp.lineno, tp.defined_class, tp.method_id, tp.self.method(tp.method_id).parameters.map(&:last)]
+      rescue NameError
+      end
     end
     trace.enable do
       if object && method
