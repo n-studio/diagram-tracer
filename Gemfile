@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in diagram_tracer.gemspec
+# Specify your gem's dependencies in diagram-tracer.gemspec
 gemspec

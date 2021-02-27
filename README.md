@@ -7,7 +7,7 @@ DiagramTracer generates mermaid-js diagrams from trace.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'diagram_tracer'
+gem 'diagram-tracer'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install diagram_tracer
+    $ gem install diagram-tracer
 
 ## Usage
 
@@ -34,7 +34,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/n-studio/diagram_tracer.
+Bug reports and pull requests are welcome on GitHub at https://github.com/n-studio/diagram-tracer.
 
 ## License
 
