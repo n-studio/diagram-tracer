@@ -12,7 +12,8 @@ module DiagramTracer
     result = nil
     trace = TracePoint.new(:call) do |tp|
       begin
-        rows << [tp.lineno, tp.defined_class, tp.method_id, tp.self.method(tp.method_id).parameters.map(&:last)]
+        next if tp.path =~ /\/lib\/ruby\// || tp.path =~ /\.pryrc/
+        rows << [tp.path, tp.defined_class, tp.method_id, tp.self.method(tp.method_id).parameters.map(&:last)]
       rescue NameError
       end
     end
