@@ -1,6 +1,6 @@
 # DiagramTracer
 
-DiagramTracer generates mermaid-js diagrams from trace.
+DiagramTracer generates plantUML diagrams from trace.
 
 ## Installation
 

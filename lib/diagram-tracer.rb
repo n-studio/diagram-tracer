@@ -5,8 +5,6 @@ module DiagramTracer
 
   module_function
 
-  TAB = "    ".freeze
-
   def trace(object = nil, method: nil, type: :sequence)
     rows = []
     result = nil
@@ -34,17 +32,13 @@ module DiagramTracer
   end
 
   def convert_to_sequence(rows, result)
-    diagram = "sequenceDiagram\n"
+    diagram = "@startuml\n"
 
-    # List participants
-    rows.each do |row|
-      diagram << TAB + "participant #{row[1]}\n"
-    end
-    diagram << TAB + "participant '#{result}'\n"
     # Draw connections
     rows.each_cons(2) do |paired_rows|
-      diagram << TAB + "#{paired_rows[0][1]}->>#{paired_rows[1][1]}: #{paired_rows[0][2]}(#{paired_rows[0][3].join(', ')})\n"
+      diagram << "\"#{paired_rows[0][1]}\" -> \"#{paired_rows[1][1]}\": \"#{paired_rows[0][2]}(#{paired_rows[0][3].join(', ')})\"\n"
     end
-    diagram << TAB + "#{rows.last[1]}->>'#{result}': #{rows.last[2]}(#{rows.last[3].join(', ')})\n"
+    diagram << "\"#{rows.last[1]}\" -> \"#{result}\": \"#{rows.last[2]}(#{rows.last[3].join(', ')})\"\n"
+    diagram << "@enduml\n"
   end
 end

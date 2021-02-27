@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Matthew Nguyen"]
   spec.email         = ["contact@n-studio.fr"]
 
-  spec.summary       = %q{DiagramTracer generates mermaid-js diagrams from trace.}
-  spec.description   = %q{DiagramTracer generates mermaid-js diagrams from trace.}
+  spec.summary       = %q{DiagramTracer generates plantUML diagrams from trace.}
+  spec.description   = %q{DiagramTracer generates plantUML diagrams from trace.}
   spec.homepage      = "https://github.com/n-studio/diagram-tracer"
   spec.license       = "MIT"
 

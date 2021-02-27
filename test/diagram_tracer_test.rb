@@ -34,14 +34,11 @@ class DiagramTracerTest < Minitest::Test
   def test_tracer_with_object_and_method
     diagram = TestClass.new.trace
     expected_diagram = <<~eos
-      sequenceDiagram
-          participant TestClass
-          participant OtherTestClass
-          participant TestClass
-          participant '42'
-          TestClass->>OtherTestClass: method1()
-          OtherTestClass->>TestClass: method2(parent)
-          TestClass->>'42': method3(arg1, arg2, arg3)
+      @startuml
+      "TestClass" -> "OtherTestClass": "method1()"
+      "OtherTestClass" -> "TestClass": "method2(parent)"
+      "TestClass" -> "42": "method3(arg1, arg2, arg3)"
+      @enduml
     eos
 
     assert_equal expected_diagram, diagram
@@ -50,14 +47,11 @@ class DiagramTracerTest < Minitest::Test
   def test_tracer_with_block
     diagram = TestClass.new.trace_block
     expected_diagram = <<~eos
-      sequenceDiagram
-          participant TestClass
-          participant OtherTestClass
-          participant TestClass
-          participant '42'
-          TestClass->>OtherTestClass: method1()
-          OtherTestClass->>TestClass: method2(parent)
-          TestClass->>'42': method3(arg1, arg2, arg3)
+      @startuml
+      "TestClass" -> "OtherTestClass": "method1()"
+      "OtherTestClass" -> "TestClass": "method2(parent)"
+      "TestClass" -> "42": "method3(arg1, arg2, arg3)"
+      @enduml
     eos
 
     assert_equal expected_diagram, diagram
