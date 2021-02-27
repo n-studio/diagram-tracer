@@ -12,7 +12,7 @@ class TestClass
   end
 
   def method1
-    OtherTestClass.new.method2(parent: self)
+    OtherTestClass.method2(parent: self)
   end
 
   def method3(arg1, arg2, arg3)
@@ -21,7 +21,7 @@ class TestClass
 end
 
 class OtherTestClass
-  def method2(parent:)
+  def self.method2(parent:)
     parent.method3(1, 2, 3)
   end
 end
@@ -35,9 +35,9 @@ class DiagramTracerTest < Minitest::Test
     diagram = TestClass.new.trace
     expected_diagram = <<~eos
       @startuml
-      "TestClass" -> "OtherTestClass": "method1()"
-      "OtherTestClass" -> "TestClass": "method2(parent)"
-      "TestClass" -> "42": "method3(arg1, arg2, arg3)"
+      "TestClass" -> "OtherTestClass": "#method1()"
+      "OtherTestClass" -> "TestClass": ".method2(parent)"
+      "TestClass" -> "42": "#method3(arg1, arg2, arg3)"
       @enduml
     eos
 
@@ -48,9 +48,9 @@ class DiagramTracerTest < Minitest::Test
     diagram = TestClass.new.trace_block
     expected_diagram = <<~eos
       @startuml
-      "TestClass" -> "OtherTestClass": "method1()"
-      "OtherTestClass" -> "TestClass": "method2(parent)"
-      "TestClass" -> "42": "method3(arg1, arg2, arg3)"
+      "TestClass" -> "OtherTestClass": "#method1()"
+      "OtherTestClass" -> "TestClass": ".method2(parent)"
+      "TestClass" -> "42": "#method3(arg1, arg2, arg3)"
       @enduml
     eos
 

@@ -11,7 +11,13 @@ module DiagramTracer
     trace = TracePoint.new(:call) do |tp|
       begin
         next if tp.path =~ /\/lib\/ruby\// || tp.path =~ /\.pryrc/
-        rows << [tp.path, tp.defined_class, tp.method_id, tp.self.method(tp.method_id).parameters.map(&:last)]
+
+        rows << [
+          tp.path,
+          tp.defined_class.to_s.start_with?("#") ? tp.defined_class.to_s.gsub(/\<|\>/, "").split(":").last : tp.defined_class,
+          tp.defined_class.to_s.start_with?("#") ? ".#{tp.method_id}" : "##{tp.method_id}",
+          tp.self.method(tp.method_id).parameters.map(&:last),
+        ]
       rescue NameError
       end
     end
@@ -26,9 +32,9 @@ module DiagramTracer
   end
 
   def convert_to_graph(rows, result, type)
+    raise Error.new("Unknown type '#{type}'") unless respond_to?("convert_to_#{type}".to_sym)
+
     send("convert_to_#{type}".to_sym, rows, result)
-  rescue NoMethodError
-    raise Error.new("Unknown type '#{type}'")
   end
 
   def convert_to_sequence(rows, result)
